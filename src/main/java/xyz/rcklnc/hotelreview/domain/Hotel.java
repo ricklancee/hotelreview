@@ -2,6 +2,7 @@ package xyz.rcklnc.hotelreview.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
@@ -12,14 +13,23 @@ public class Hotel {
     private final String country;
     private final String address;
 
-    private Hotel(HotelId id, String name, String country, String address) {
+    private final Double latitude;
+
+    private final Double longitude;
+
+    private Hotel(HotelId id, String name, String address, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
-        this.country = country;
         this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
-    public static Hotel of(HotelId id, String name, String country, String address) {
-        return new Hotel(id, name, country, address);
+    public static Hotel from(HotelId id, String name, String address, Double latitude, Double longitude) {
+        return new Hotel(id, name, address, latitude, longitude);
+    }
+
+    public static Hotel create(String name, String address, Double latitude, Double longitude) {
+        return from(HotelId.create(), name, address, latitude, longitude);
     }
 }
