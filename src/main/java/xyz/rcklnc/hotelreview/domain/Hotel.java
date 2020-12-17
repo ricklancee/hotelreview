@@ -4,9 +4,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Hotel {
+    private final List<DomainEvent> events = new ArrayList<>();
+
     @EqualsAndHashCode.Include
     private final HotelId id;
 
@@ -36,6 +41,11 @@ public class Hotel {
 
     public void changeName(@NonNull String newName) {
         this.name = newName;
+
+        addEvent(new HotelNameWasChanged(this.id, this.name));
     }
 
+    private void addEvent(DomainEvent event) {
+        this.events.add(event);
+    }
 }

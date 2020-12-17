@@ -85,4 +85,16 @@ class HotelTest {
         Hotel aHotel = Hotel.create("A hotel", null, null, null);
         assertThrows(NullPointerException.class, () -> aHotel.changeName(null));
     }
+
+    @Test
+    public void givenAHotel_whenTheNameIsChanged_thenANameWasChangedEventShouldHaveBeenCreated() {
+        Hotel aHotel = Hotel.create("A Hotel", null, null, null);
+        aHotel.changeName("Changed Hotel Name");
+        DomainEvent nameWasChangedEvent = aHotel.getEvents().get(0);
+
+        assertEquals(1, aHotel.getEvents().size());
+        assertTrue(nameWasChangedEvent instanceof HotelNameWasChanged);
+        assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getHotelId(), aHotel.getId());
+        assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getName(), "Changed Hotel Name");
+    }
 }
