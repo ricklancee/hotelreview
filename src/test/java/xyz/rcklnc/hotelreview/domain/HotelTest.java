@@ -19,7 +19,8 @@ class HotelTest {
 
     @Test
     public void givenTwoHotelsWithTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
-        Hotel hotel = Hotel.from(HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
+        Hotel hotel = Hotel.from(
+            HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
             "a",
             52.3605759,
