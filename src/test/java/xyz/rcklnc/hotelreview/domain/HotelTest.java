@@ -66,6 +66,14 @@ class HotelTest {
     }
 
     @Test
+    public void whenANewHotelIsCreated_thenItShouldGenerateAUniqueId() {
+        Hotel aHotel = Hotel.create("A hotel", null, null, null);
+        Hotel aSecondHotel = Hotel.create("A hotel", null, null, null);
+
+        assertNotEquals(aHotel.getId(), aSecondHotel.getId());
+    }
+
+    @Test
     public void givenAHotel_whenTheNameIsChanged_thenTheNameShouldBeChanged() {
         Hotel aHotel = Hotel.create("A hotel", null, null, null);
         aHotel.changeName("A Changed Hotel");
