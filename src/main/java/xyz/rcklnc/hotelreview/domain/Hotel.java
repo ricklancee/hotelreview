@@ -9,8 +9,9 @@ import lombok.NonNull;
 public class Hotel {
     @EqualsAndHashCode.Include
     private final HotelId id;
-    private final String name;
-    private final String country;
+
+    private String name;
+
     private final String address;
 
     private final Double latitude;
@@ -32,4 +33,9 @@ public class Hotel {
     public static Hotel create(String name, String address, Double latitude, Double longitude) {
         return from(HotelId.create(), name, address, latitude, longitude);
     }
+
+    public void changeName(@NonNull String newName) {
+        this.name = newName;
+    }
+
 }
