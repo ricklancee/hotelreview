@@ -23,7 +23,7 @@ public class Hotel {
 
     private final Double longitude;
 
-    private Hotel(HotelId id, String name, String address, Double latitude, Double longitude) {
+    private Hotel(@NonNull HotelId id, String name, String address, Double latitude, Double longitude) {
         this.id = id;
         this.name = name;
         this.address = address;

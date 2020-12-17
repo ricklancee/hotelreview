@@ -7,6 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class HotelTest {
 
     @Test
+    public void whenAHotelIsCreatedWithNullAsAnId_thenItShouldThrowANullPointerException() {
+        assertThrows(NullPointerException.class, () -> Hotel.from(
+            null,
+            null,
+            null,
+            null,
+            null
+        ));
+    }
+
+    @Test
     public void givenTwoHotelsWithTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
         Hotel hotel = Hotel.from(HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
