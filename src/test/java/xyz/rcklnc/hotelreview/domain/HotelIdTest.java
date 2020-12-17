@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class HotelIdTest {
 
     @Test
-    public void twoIdsWithTheSameValueShouldBeEqual() {
+    public void givenTwoIdsWithTheSameValue_whenTheyAreCompared_thenTheyShouldBeEqual() {
         HotelId hotelID1 = HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936");
         HotelId hotelID2 = HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936");
 
@@ -16,7 +16,7 @@ class HotelIdTest {
     }
 
     @Test
-    public void twoIdsWithTheDifferentValuesShouldNotBeEqual() {
+    public void givenTwoIdsWithTheDifferentValues_whenTheyAreCompared_thenTheyShouldNotBeEqual() {
         HotelId hotelID1 = HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936");
         HotelId hotelID2 = HotelId.from("bb4b3ccd-ec41-4734-a74a-588b9fd51cd2");
 
@@ -24,7 +24,7 @@ class HotelIdTest {
     }
 
     @Test
-    public void creatingANewIdShouldCreateARandomId() {
+    public void givenTwoNewlyCreatedIds_whenTheyAreCompared_theyShouldNotBeEqual() {
         HotelId hotelId1 = HotelId.create();
         HotelId hotelId2 = HotelId.create();
 
