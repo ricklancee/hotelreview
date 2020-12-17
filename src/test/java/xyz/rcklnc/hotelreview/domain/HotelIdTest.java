@@ -2,10 +2,14 @@ package xyz.rcklnc.hotelreview.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class HotelIdTest {
+
+    @Test
+    public void givenAStringThatIsNotAValidUUID_whenAnIdIsCreated_thenItShouldThrownAException() {
+        assertThrows(IllegalArgumentException.class, () -> HotelId.from("not-a-valid-uuid"));
+    }
 
     @Test
     public void givenTwoIdsWithTheSameValue_whenTheyAreCompared_thenTheyShouldBeEqual() {
