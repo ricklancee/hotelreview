@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HotelTest {
 
     @Test
-    public void givenTwoHotelsWithTheSameIds_whenTheyAreCompare_thenTheyShouldBeEqual() {
+    public void givenTwoHotelsWithTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
         Hotel hotel = Hotel.from(HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
             "a",
@@ -46,7 +46,7 @@ class HotelTest {
     }
 
     @Test
-    public void givenTwoHotelsWithDifferentFieldsButTheSameId_whenTheAreCompared_thenTheyShouldBeEqual() {
+    public void givenTwoHotelsWithDifferentFieldsButTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
@@ -66,7 +66,7 @@ class HotelTest {
     }
 
     @Test
-    public void whenANewHotelIsCreated_thenItShouldGenerateAUniqueId() {
+    public void whenANewHotelIsCreated_thenItShouldGenerateAUniqueIdForEachHotel() {
         Hotel aHotel = Hotel.create("A hotel", null, null, null);
         Hotel aSecondHotel = Hotel.create("A hotel", null, null, null);
 
