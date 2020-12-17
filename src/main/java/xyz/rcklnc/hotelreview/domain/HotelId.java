@@ -4,16 +4,22 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.UUID;
+
 @EqualsAndHashCode
 @Getter
 public class HotelId {
-    private final Long identifier;
+    private final UUID identifier;
 
-    private HotelId(Long identifier) {
+    private HotelId(UUID identifier) {
         this.identifier = identifier;
     }
 
-    public static HotelId of(@NonNull Long identifier) {
-        return new HotelId(identifier);
+    public static HotelId from(@NonNull String identifier) {
+        return new HotelId(UUID.fromString(identifier));
+    }
+
+    public static HotelId create() {
+        return new HotelId(UUID.randomUUID());
     }
 }
