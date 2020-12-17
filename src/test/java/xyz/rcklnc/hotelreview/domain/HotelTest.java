@@ -75,8 +75,6 @@ class HotelTest {
     @Test
     public void givenAHotel_whenTheNameIsSetToNull_thenANullPointerExceptionShouldBeThrown() {
         Hotel aHotel = Hotel.create("A hotel", null, null, null);
-        assertThrows(NullPointerException.class, () -> {
-            aHotel.changeName(null);
-        });
+        assertThrows(NullPointerException.class, () -> aHotel.changeName(null));
     }
 }
