@@ -109,7 +109,6 @@ https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe
 
 ### References:
 
-- https://www.youtube.com/watch?v=whCk1Q87_ZI
 - https://www.youtube.com/watch?v=LDW0QWie21s
 - https://www.youtube.com/watch?v=m1FhLPmiK9A
 - https://cqrs.files.wordpress.com/2010/11/cqrs_documents.pdf
@@ -120,10 +119,20 @@ https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe
 - https://www.youtube.com/watch?v=A0goyZ9F4bg
 - https://www.youtube.com/watch?v=7kX3fs0pWwc
 - https://www.youtube.com/watch?v=I3uH3iiiDqY
-- Microservices Evolution: How to break your monolithic database by Edson Yanaga
-- https://www.youtube.com/watch?v=6dfBd-2Oq1M
+- GregYoung 8 CQRS Class https://www.youtube.com/watch?v=whCk1Q87_ZI
 - Microservices Data Patterns: CQRS & Event Sourcing by Edson Yanaga
 - https://www.youtube.com/watch?v=eyf2Fs7GBo0
+- JPA Essentials Workshop – Fundamental Concepts and Common Pitfalls by Victor Rentea
+  https://www.youtube.com/watch?v=r_E6W2d9x5w
+- Victor Rentea - Evolving a Clean, Pragmatic Architecture – A Software Crafter's Guide
+  https://www.youtube.com/watch?v=tMHO7_RLxgQ
+- Victor Rentea - Unit Testing like a Pro: The Circle of Purity
+  https://www.youtube.com/watch?v=1Z_h55jMe-M
+- The Art Of Clean Code by Victor Rentea
+  https://www.youtube.com/watch?v=J4OIo4T7I_E
+- Clean Code with Java8 4 years later (V. Rentea)
+  https://www.youtube.com/watch?v=-WInMyeAqTE
+- Microservices Evolution: How to break your monolithic database by Edson Yanaga https://www.youtube.com/watch?v=6dfBd-2Oq1M
 
 ### Docs:
 
