@@ -100,7 +100,7 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheNameIsChanged_thenANameWasChangedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.create("A Hotel", null, null, null);
+        Hotel aHotel = Hotel.from(HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"), "A Hotel", null, null, null);
         aHotel.changeName("Changed Hotel Name");
         DomainEvent nameWasChangedEvent = aHotel.getEvents().get(0);
 

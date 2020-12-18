@@ -1,11 +1,9 @@
 package xyz.rcklnc.hotelreview.domain;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.Value;
 
-@Data
-@RequiredArgsConstructor
+@Value
 public class HotelNameWasChanged implements DomainEvent {
-    private final HotelId hotelId;
-    private final String name;
+    HotelId hotelId;
+    String name;
 }
