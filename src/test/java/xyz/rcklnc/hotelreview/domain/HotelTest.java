@@ -1,19 +1,29 @@
 package xyz.rcklnc.hotelreview.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HotelTest {
 
+    private Address aAddress;
+
+    @BeforeEach
+    public void setup() {
+        this.aAddress = new Address(
+            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+            52.373161,
+            4.890900
+        );
+    }
+
     @Test
     public void whenAHotelIsCreatedWithNullAsAnId_thenItShouldThrowANullPointerException() {
         assertThrows(NullPointerException.class, () -> Hotel.from(
             null,
             null,
-            null,
-            null,
-            null
+            this.aAddress
         ));
     }
 
@@ -22,19 +32,20 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            "a",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            "a",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
 
         assertEquals(hotel, hotel2);
+        assertEquals(new Address(
+            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+            52.373161,
+            4.890900
+        ), hotel.getAddress());
     }
 
     @Test
@@ -42,16 +53,12 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            "a",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("bb4b3ccd-ec41-4734-a74a-588b9fd51cd2"),
             "name",
-            "a",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
 
         assertNotEquals(hotel, hotel2);
@@ -62,16 +69,12 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            "a",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name2",
-            "a2",
-            52.3605759,
-            4.9159683
+            this.aAddress
         );
 
         assertEquals(hotel, hotel2);
@@ -79,22 +82,22 @@ class HotelTest {
 
     @Test
     public void whenANewHotelIsCreated_thenItShouldGenerateAUniqueIdForEachHotel() {
-        Hotel aHotel = Hotel.create("A hotel", null, null, null);
-        Hotel aSecondHotel = Hotel.create("A hotel", null, null, null);
+        Hotel aHotel = Hotel.create("A hotel", null);
+        Hotel aSecondHotel = Hotel.create("A hotel", null);
 
         assertNotEquals(aHotel.getId(), aSecondHotel.getId());
     }
 
     @Test
     public void givenAHotel_whenTheNameIsChanged_thenTheNameShouldBeChanged() {
-        Hotel aHotel = Hotel.create("A hotel", null, null, null);
+        Hotel aHotel = Hotel.create("A hotel", null);
         aHotel.changeName("A Changed Hotel");
         assertEquals("A Changed Hotel", aHotel.getName());
     }
 
     @Test
     public void givenAHotel_whenTheNameIsSetToNull_thenANullPointerExceptionShouldBeThrown() {
-        Hotel aHotel = Hotel.create("A hotel", null, null, null);
+        Hotel aHotel = Hotel.create("A hotel", null);
         assertThrows(NullPointerException.class, () -> aHotel.changeName(null));
     }
 
@@ -103,8 +106,6 @@ class HotelTest {
         Hotel aHotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "A Hotel",
-            null,
-            null,
             null
         );
         aHotel.changeName("Changed Hotel Name");
@@ -118,7 +119,7 @@ class HotelTest {
 
     @Test
     public void whenAHotelIsCreated_thenAHotelWasCreatedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.create("A hotel", "A address", 10.1, 20.2);
+        Hotel aHotel = Hotel.create("A hotel", this.aAddress);
 
         DomainEvent hotelWasCreatedEvent = aHotel.getEvents().get(0);
 
@@ -126,14 +127,17 @@ class HotelTest {
         assertTrue(hotelWasCreatedEvent instanceof HotelWasCreated);
         assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getHotelId(), aHotel.getId());
         assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getName(), "A hotel");
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getAddress(), "A address");
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getLatitude(), 10.1);
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getLongitude(), 20.2);
+
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getAddress(), new Address(
+            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+            52.373161,
+            4.890900
+        ));
     }
 
     @Test
     public void givenAHotel_whenTheEventsListIsModified_thenItShouldThrowAUnsupportedOperationException() {
-        Hotel aHotel = Hotel.create("A hotel", "A address", 10.1, 20.2);
+        Hotel aHotel = Hotel.create("A hotel", this.aAddress);
         assertThrows(UnsupportedOperationException.class, () -> aHotel.getEvents().add(new HotelNameWasChanged(
             aHotel.getId(),
             "changed"

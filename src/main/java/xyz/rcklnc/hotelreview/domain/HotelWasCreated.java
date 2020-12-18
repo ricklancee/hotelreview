@@ -6,7 +6,5 @@ import lombok.Value;
 public class HotelWasCreated implements DomainEvent {
     HotelId hotelId;
     String name;
-    String address;
-    Double latitude;
-    Double longitude;
+    Address address;
 }

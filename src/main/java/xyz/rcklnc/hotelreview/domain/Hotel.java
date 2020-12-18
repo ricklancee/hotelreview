@@ -15,29 +15,21 @@ public class Hotel extends Aggregate {
     private String name;
 
     @Getter
-    private final String address;
+    private final Address address;
 
-    @Getter
-    private final Double latitude;
-
-    @Getter
-    private final Double longitude;
-
-    private Hotel(@NonNull HotelId id, String name, String address, Double latitude, Double longitude) {
+    private Hotel(@NonNull HotelId id, String name, Address address) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
-    public static Hotel from(HotelId id, String name, String address, Double latitude, Double longitude) {
-        return new Hotel(id, name, address, latitude, longitude);
+    public static Hotel from(HotelId id, String name, Address address) {
+        return new Hotel(id, name, address);
     }
 
-    public static Hotel create(String name, String address, Double latitude, Double longitude) {
-        Hotel hotel = from(HotelId.create(), name, address, latitude, longitude);
-        hotel.addEvent(new HotelWasCreated(hotel.id, hotel.name, hotel.address, hotel.latitude, hotel.longitude));
+    public static Hotel create(String name, Address address) {
+        Hotel hotel = from(HotelId.create(), name, address);
+        hotel.addEvent(new HotelWasCreated(hotel.id, hotel.name, hotel.address));
         return hotel;
     }
 
