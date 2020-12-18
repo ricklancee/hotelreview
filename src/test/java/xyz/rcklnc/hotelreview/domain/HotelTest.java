@@ -1,29 +1,21 @@
 package xyz.rcklnc.hotelreview.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class HotelTest {
 
-    private Address aAddress;
-
-    @BeforeEach
-    public void setup() {
-        this.aAddress = new Address(
-            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
-            52.373161,
-            4.890900
-        );
-    }
-
     @Test
     public void whenAHotelIsCreatedWithNullAsAnId_thenItShouldThrowANullPointerException() {
         assertThrows(NullPointerException.class, () -> Hotel.from(
             null,
             null,
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         ));
     }
 
@@ -32,12 +24,20 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
 
         assertEquals(hotel, hotel2);
@@ -53,12 +53,20 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("bb4b3ccd-ec41-4734-a74a-588b9fd51cd2"),
             "name",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
 
         assertNotEquals(hotel, hotel2);
@@ -69,12 +77,20 @@ class HotelTest {
         Hotel hotel = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
         Hotel hotel2 = Hotel.from(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name2",
-            this.aAddress
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
         );
 
         assertEquals(hotel, hotel2);
@@ -119,7 +135,11 @@ class HotelTest {
 
     @Test
     public void whenAHotelIsCreated_thenAHotelWasCreatedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.create("A hotel", this.aAddress);
+        Hotel aHotel = Hotel.create("A hotel", new Address(
+            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+            52.373161,
+            4.890900
+        ));
 
         DomainEvent hotelWasCreatedEvent = aHotel.getEvents().get(0);
 
@@ -140,10 +160,82 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheEventsListIsModified_thenItShouldThrowAUnsupportedOperationException() {
-        Hotel aHotel = Hotel.create("A hotel", this.aAddress);
+        Hotel aHotel = Hotel.create("A hotel", new Address(
+            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+            52.373161,
+            4.890900
+        ));
         assertThrows(UnsupportedOperationException.class, () -> aHotel.getEvents().add(new HotelNameWasChanged(
             aHotel.getId(),
             "changed"
         )));
+    }
+
+    @Test
+    public void givenAHotel_whenTheAddressIsChanged_thenItShouldHaveUpdatedTheAddress() {
+        Hotel aHotel = Hotel.from(
+            HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
+            "name",
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
+        );
+
+        aHotel.changeAddress(new Address(
+            "Prins Hendrikkade 83H, 1012 AE Amsterdam",
+            52.376660,
+            4.901580
+        ));
+
+        assertEquals(new Address(
+            "Prins Hendrikkade 83H, 1012 AE Amsterdam",
+            52.376660,
+            4.901580
+        ), aHotel.getAddress());
+    }
+
+    @Test
+    public void givenAHotel_whenTheAddressIsChanged_thenItShouldHaveCreatedAHotelAddressWasChangedEvent() {
+        Hotel aHotel = Hotel.from(
+            HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
+            "name",
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            )
+        );
+
+        aHotel.changeAddress(new Address(
+            "Prins Hendrikkade 83H, 1012 AE Amsterdam",
+            52.376660,
+            4.901580
+        ));
+
+        DomainEvent hotelAddressWasChanged = aHotel.getEvents().get(0);
+
+        assertEquals(1, aHotel.getEvents().size());
+        assertTrue(hotelAddressWasChanged instanceof HotelAddressWasChanged);
+        assertEquals(aHotel.getId(), ((HotelAddressWasChanged) hotelAddressWasChanged).getHotelId());
+
+        Address expectedAddress = new Address(
+            "Prins Hendrikkade 83H, 1012 AE Amsterdam",
+            52.376660,
+            4.901580
+        );
+        assertEquals(
+            expectedAddress.getAddressLine(),
+            ((HotelAddressWasChanged) hotelAddressWasChanged).getAddressLine()
+        );
+        assertEquals(
+            expectedAddress.getLatitude(),
+            ((HotelAddressWasChanged) hotelAddressWasChanged).getLatitude()
+        );
+        assertEquals(
+            expectedAddress.getLongitude(),
+            ((HotelAddressWasChanged) hotelAddressWasChanged).getLongitude()
+        );
     }
 }

@@ -15,7 +15,7 @@ public class Hotel extends Aggregate {
     private String name;
 
     @Getter
-    private final Address address;
+    private Address address;
 
     private Hotel(@NonNull HotelId id, String name, Address address) {
         this.id = id;
@@ -39,4 +39,14 @@ public class Hotel extends Aggregate {
         addEvent(new HotelNameWasChanged(this.id, this.name));
     }
 
+    public void changeAddress(Address address) {
+        this.address = address;
+
+        addEvent(new HotelAddressWasChanged(
+            this.id,
+            this.address.getAddressLine(),
+            this.address.getLatitude(),
+            this.address.getLongitude()
+        ));
+    }
 }
