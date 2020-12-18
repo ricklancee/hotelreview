@@ -100,7 +100,13 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheNameIsChanged_thenANameWasChangedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.from(HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"), "A Hotel", null, null, null);
+        Hotel aHotel = Hotel.from(
+            HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
+            "A Hotel",
+            null,
+            null,
+            null
+        );
         aHotel.changeName("Changed Hotel Name");
         DomainEvent nameWasChangedEvent = aHotel.getEvents().get(0);
 
@@ -108,5 +114,20 @@ class HotelTest {
         assertTrue(nameWasChangedEvent instanceof HotelNameWasChanged);
         assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getHotelId(), aHotel.getId());
         assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getName(), "Changed Hotel Name");
+    }
+
+    @Test
+    public void whenAHotelIsCreated_thenAHotelWasCreatedEventShouldHaveBeenCreated() {
+        Hotel aHotel = Hotel.create("A hotel", "A address", 10.1, 20.2);
+
+        DomainEvent hotelWasCreatedEvent = aHotel.getEvents().get(0);
+
+        assertEquals(1, aHotel.getEvents().size());
+        assertTrue(hotelWasCreatedEvent instanceof HotelWasCreated);
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getHotelId(), aHotel.getId());
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getName(), "A hotel");
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getAddress(), "A address");
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getLatitude(), 10.1);
+        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getLongitude(), 20.2);
     }
 }

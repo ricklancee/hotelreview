@@ -36,7 +36,9 @@ public class Hotel extends Aggregate {
     }
 
     public static Hotel create(String name, String address, Double latitude, Double longitude) {
-        return from(HotelId.create(), name, address, latitude, longitude);
+        Hotel hotel = from(HotelId.create(), name, address, latitude, longitude);
+        hotel.addEvent(new HotelWasCreated(hotel.id, hotel.name, hotel.address, hotel.latitude, hotel.longitude));
+        return hotel;
     }
 
     public void changeName(@NonNull String newName) {
