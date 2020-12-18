@@ -4,19 +4,23 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
-@Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Hotel extends Aggregate {
 
     @EqualsAndHashCode.Include
+    @Getter
     private final HotelId id;
 
+    @Getter
     private String name;
 
+    @Getter
     private final String address;
 
+    @Getter
     private final Double latitude;
 
+    @Getter
     private final Double longitude;
 
     private Hotel(@NonNull HotelId id, String name, String address, Double latitude, Double longitude) {
