@@ -134,8 +134,9 @@ class HotelTest {
     @Test
     public void givenAHotel_whenTheEventsListIsModified_thenItShouldThrowAUnsupportedOperationException() {
         Hotel aHotel = Hotel.create("A hotel", "A address", 10.1, 20.2);
-        assertThrows(UnsupportedOperationException.class, () -> {
-            aHotel.getEvents().add(new HotelNameWasChanged(aHotel.getId(), "changed"));
-        });
+        assertThrows(UnsupportedOperationException.class, () -> aHotel.getEvents().add(new HotelNameWasChanged(
+            aHotel.getId(),
+            "changed"
+        )));
     }
 }
