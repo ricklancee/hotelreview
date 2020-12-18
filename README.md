@@ -133,6 +133,8 @@ https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe
 - Clean Code with Java8 4 years later (V. Rentea)
   https://www.youtube.com/watch?v=-WInMyeAqTE
 - Microservices Evolution: How to break your monolithic database by Edson Yanaga https://www.youtube.com/watch?v=6dfBd-2Oq1M
+- Using sagas to maintain data consistency in a microservice architecture by Chris Richardson
+   https://www.youtube.com/watch?v=YPbGW3Fnmbc
 
 ### Docs:
 
