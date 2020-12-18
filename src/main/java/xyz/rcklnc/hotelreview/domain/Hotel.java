@@ -4,13 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Hotel {
-    private final List<DomainEvent> events = new ArrayList<>();
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+public class Hotel extends Aggregate {
 
     @EqualsAndHashCode.Include
     private final HotelId id;
@@ -45,7 +41,4 @@ public class Hotel {
         addEvent(new HotelNameWasChanged(this.id, this.name));
     }
 
-    private void addEvent(DomainEvent event) {
-        this.events.add(event);
-    }
 }
