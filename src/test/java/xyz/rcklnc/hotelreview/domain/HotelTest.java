@@ -113,8 +113,8 @@ class HotelTest {
 
         assertEquals(1, aHotel.getEvents().size());
         assertTrue(nameWasChangedEvent instanceof HotelNameWasChanged);
-        assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getHotelId(), aHotel.getId());
-        assertEquals(((HotelNameWasChanged) nameWasChangedEvent).getName(), "Changed Hotel Name");
+        assertEquals(aHotel.getId(), ((HotelNameWasChanged) nameWasChangedEvent).getHotelId());
+        assertEquals("Changed Hotel Name", ((HotelNameWasChanged) nameWasChangedEvent).getName());
     }
 
     @Test
@@ -125,14 +125,17 @@ class HotelTest {
 
         assertEquals(1, aHotel.getEvents().size());
         assertTrue(hotelWasCreatedEvent instanceof HotelWasCreated);
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getHotelId(), aHotel.getId());
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getName(), "A hotel");
+        assertEquals(aHotel.getId(), ((HotelWasCreated) hotelWasCreatedEvent).getHotelId());
+        assertEquals("A hotel", ((HotelWasCreated) hotelWasCreatedEvent).getName());
 
-        assertEquals(((HotelWasCreated) hotelWasCreatedEvent).getAddress(), new Address(
-            "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
-            52.373161,
-            4.890900
-        ));
+        assertEquals(
+            new Address(
+                "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
+                52.373161,
+                4.890900
+            ),
+            ((HotelWasCreated) hotelWasCreatedEvent).getAddress()
+        );
     }
 
     @Test
