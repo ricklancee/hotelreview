@@ -1,18 +1,17 @@
 package xyz.rcklnc.hotelreview.domain;
 
-import lombok.Data;
 import lombok.NonNull;
+import lombok.Value;
 
-@Data
+@Value
 public class Address {
-    private final String addressLine;
-    private final Double latitude;
-    private final Double longitude;
+    String addressLine;
+    Double latitude;
+    Double longitude;
 
-    @NonNull
-    public Address(String addressLine, Double latitude, Double longitude) {
+    public Address(@NonNull String addressLine, @NonNull Double latitude, @NonNull Double longitude) {
         if (latitude <= -90 || latitude > 90) {
-            throw new IllegalArgumentException(latitude.toString() + " is not a valid latitude. Valid range from -90 to 90");
+            throw new IllegalArgumentException(latitude + " is not a valid latitude. Valid range from -90 to 90");
         }
 
         if (longitude <= -180 || longitude > 180) {

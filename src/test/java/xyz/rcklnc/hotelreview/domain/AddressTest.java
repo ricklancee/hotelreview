@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AddressTest {
     @Test
+    public void whenEmptyAddressIsCreted_thenItShouldThrowANullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Address(null, null, null));
+    }
+
+    @Test
     public void whenAddressIsGivenAnInvalidLatitude_thenItShouldThrowAIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, ()-> new Address("Address", 91.00, 180.00));
         assertThrows(IllegalArgumentException.class, ()-> new Address("Address", -91.00, -180.00));
