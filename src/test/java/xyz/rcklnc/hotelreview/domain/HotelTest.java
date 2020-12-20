@@ -165,10 +165,7 @@ class HotelTest {
             52.373161,
             4.890900
         ));
-        assertThrows(UnsupportedOperationException.class, () -> aHotel.getEvents().add(new HotelNameWasChanged(
-            aHotel.getId(),
-            "changed"
-        )));
+        assertThrows(UnsupportedOperationException.class, () -> aHotel.getEvents().add(HotelNameWasChanged.from(aHotel)));
     }
 
     @Test

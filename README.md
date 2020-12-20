@@ -9,6 +9,16 @@ Note: I'm not trying to create a quick and dirty side project; this will be writ
 
 
 
+## Events
+
+```
+Hotel 
+ - HotelWasCreated
+ - HotelNameWasChanged
+ - HotelAddressWasChanged
+```
+
+
 ## Project scratches
 
 _This is a dump of information not necessarily documentation_ 

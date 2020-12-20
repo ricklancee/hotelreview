@@ -29,24 +29,19 @@ public class Hotel extends Aggregate {
 
     public static Hotel create(String name, Address address) {
         Hotel hotel = from(HotelId.create(), name, address);
-        hotel.addEvent(new HotelWasCreated(hotel.id, hotel.name, hotel.address));
+        hotel.addEvent(HotelWasCreated.from(hotel));
         return hotel;
     }
 
     public void changeName(@NonNull String newName) {
         this.name = newName;
 
-        addEvent(new HotelNameWasChanged(this.id, this.name));
+        addEvent(HotelNameWasChanged.from(this));
     }
 
     public void changeAddress(Address address) {
         this.address = address;
 
-        addEvent(new HotelAddressWasChanged(
-            this.id,
-            this.address.getAddressLine(),
-            this.address.getLatitude(),
-            this.address.getLongitude()
-        ));
+        addEvent(HotelAddressWasChanged.from(this));
     }
 }
