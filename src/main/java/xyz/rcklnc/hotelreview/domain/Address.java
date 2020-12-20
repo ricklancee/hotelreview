@@ -9,7 +9,7 @@ public class Address {
     Double latitude;
     Double longitude;
 
-    public Address(@NonNull String addressLine, @NonNull Double latitude, @NonNull Double longitude) {
+    private Address(@NonNull String addressLine, @NonNull Double latitude, @NonNull Double longitude) {
         if (latitude <= -90 || latitude > 90) {
             throw new IllegalArgumentException(latitude + " is not a valid latitude. Valid range from -90 to 90");
         }
@@ -21,5 +21,9 @@ public class Address {
         this.addressLine = addressLine;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public static Address from(@NonNull String addressLine, @NonNull Double latitude, @NonNull Double longitude) {
+        return new Address(addressLine, latitude, longitude);
     }
 }
