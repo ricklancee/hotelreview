@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AddressTest {
     @Test
-    public void whenEmptyAddressIsCreted_thenItShouldThrowANullPointerException() {
+    public void whenEmptyAddressIsCreated_thenItShouldThrowANullPointerException() {
         assertThrows(NullPointerException.class, () -> Address.of(null, null, null));
     }
 
