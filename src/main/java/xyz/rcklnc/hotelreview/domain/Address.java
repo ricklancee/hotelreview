@@ -23,7 +23,7 @@ public class Address {
         this.longitude = longitude;
     }
 
-    public static Address from(@NonNull String addressLine, @NonNull Double latitude, @NonNull Double longitude) {
+    public static Address of(String addressLine, Double latitude, Double longitude) {
         return new Address(addressLine, latitude, longitude);
     }
 }

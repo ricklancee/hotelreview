@@ -23,12 +23,12 @@ public class Hotel extends Aggregate {
         this.address = address;
     }
 
-    public static Hotel from(HotelId id, String name, Address address) {
+    public static Hotel of(HotelId id, String name, Address address) {
         return new Hotel(id, name, address);
     }
 
     public static Hotel create(String name, Address address) {
-        Hotel hotel = from(HotelId.create(), name, address);
+        Hotel hotel = new Hotel(HotelId.create(), name, address);
         hotel.addEvent(HotelWasCreated.from(hotel));
         return hotel;
     }

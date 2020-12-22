@@ -8,10 +8,10 @@ class HotelTest {
 
     @Test
     public void whenAHotelIsCreatedWithNullAsAnId_thenItShouldThrowANullPointerException() {
-        assertThrows(NullPointerException.class, () -> Hotel.from(
+        assertThrows(NullPointerException.class, () -> Hotel.of(
             null,
             null,
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
@@ -21,19 +21,19 @@ class HotelTest {
 
     @Test
     public void givenTwoHotelsWithTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
-        Hotel hotel = Hotel.from(
+        Hotel hotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
             )
         );
-        Hotel hotel2 = Hotel.from(
+        Hotel hotel2 = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
@@ -41,7 +41,7 @@ class HotelTest {
         );
 
         assertEquals(hotel, hotel2);
-        assertEquals(Address.from(
+        assertEquals(Address.of(
             "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
             52.373161,
             4.890900
@@ -50,19 +50,19 @@ class HotelTest {
 
     @Test
     public void givenTwoHotelsWithDifferentIds_whenTheyAreCompared_thenTheyShouldNotBeEqual() {
-        Hotel hotel = Hotel.from(
+        Hotel hotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
             )
         );
-        Hotel hotel2 = Hotel.from(
+        Hotel hotel2 = Hotel.of(
             HotelId.from("bb4b3ccd-ec41-4734-a74a-588b9fd51cd2"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
@@ -74,19 +74,19 @@ class HotelTest {
 
     @Test
     public void givenTwoHotelsWithDifferentFieldsButTheSameId_whenTheyAreCompared_thenTheyShouldBeEqual() {
-        Hotel hotel = Hotel.from(
+        Hotel hotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
             )
         );
-        Hotel hotel2 = Hotel.from(
+        Hotel hotel2 = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name2",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
@@ -119,7 +119,7 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheNameIsChanged_thenANameWasChangedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.from(
+        Hotel aHotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "A Hotel",
             null
@@ -135,7 +135,7 @@ class HotelTest {
 
     @Test
     public void whenAHotelIsCreated_thenAHotelWasCreatedEventShouldHaveBeenCreated() {
-        Hotel aHotel = Hotel.create("A hotel", Address.from(
+        Hotel aHotel = Hotel.create("A hotel", Address.of(
             "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
             52.373161,
             4.890900
@@ -149,7 +149,7 @@ class HotelTest {
         assertEquals("A hotel", ((HotelWasCreated) hotelWasCreatedEvent).getName());
 
         assertEquals(
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
@@ -160,7 +160,7 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheEventsListIsModified_thenItShouldThrowAUnsupportedOperationException() {
-        Hotel aHotel = Hotel.create("A hotel", Address.from(
+        Hotel aHotel = Hotel.create("A hotel", Address.of(
             "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
             52.373161,
             4.890900
@@ -170,23 +170,23 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheAddressIsChanged_thenItShouldHaveUpdatedTheAddress() {
-        Hotel aHotel = Hotel.from(
+        Hotel aHotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
             )
         );
 
-        aHotel.changeAddress(Address.from(
+        aHotel.changeAddress(Address.of(
             "Prins Hendrikkade 83H, 1012 AE Amsterdam",
             52.376660,
             4.901580
         ));
 
-        assertEquals(Address.from(
+        assertEquals(Address.of(
             "Prins Hendrikkade 83H, 1012 AE Amsterdam",
             52.376660,
             4.901580
@@ -195,17 +195,17 @@ class HotelTest {
 
     @Test
     public void givenAHotel_whenTheAddressIsChanged_thenItShouldHaveCreatedAHotelAddressWasChangedEvent() {
-        Hotel aHotel = Hotel.from(
+        Hotel aHotel = Hotel.of(
             HotelId.from("1d28320f-c9ff-4ec6-9744-1f4ae91cf936"),
             "name",
-            Address.from(
+            Address.of(
                 "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
                 52.373161,
                 4.890900
             )
         );
 
-        aHotel.changeAddress(Address.from(
+        aHotel.changeAddress(Address.of(
             "Prins Hendrikkade 83H, 1012 AE Amsterdam",
             52.376660,
             4.901580
@@ -217,7 +217,7 @@ class HotelTest {
         assertTrue(hotelAddressWasChanged instanceof HotelAddressWasChanged);
         assertEquals(aHotel.getId(), ((HotelAddressWasChanged) hotelAddressWasChanged).getHotelId());
 
-        Address expectedAddress = Address.from(
+        Address expectedAddress = Address.of(
             "Prins Hendrikkade 83H, 1012 AE Amsterdam",
             52.376660,
             4.901580
