@@ -1,3 +1,7 @@
 package xyz.rcklnc.hotelreview.domain;
 
-public interface DomainEvent { }
+import java.time.Instant;
+
+public interface DomainEvent {
+    Instant getOccurredOn();
+}

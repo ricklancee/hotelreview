@@ -2,6 +2,8 @@ package xyz.rcklnc.hotelreview.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class HotelTest {
@@ -128,6 +130,7 @@ class HotelTest {
         DomainEvent nameWasChangedEvent = aHotel.getEvents().get(0);
 
         assertEquals(1, aHotel.getEvents().size());
+        assertTrue(nameWasChangedEvent.getOccurredOn().isBefore(Instant.now()));
         assertTrue(nameWasChangedEvent instanceof HotelNameWasChanged);
         assertEquals(aHotel.getId(), ((HotelNameWasChanged) nameWasChangedEvent).getHotelId());
         assertEquals("Changed Hotel Name", ((HotelNameWasChanged) nameWasChangedEvent).getName());
@@ -144,6 +147,7 @@ class HotelTest {
         DomainEvent hotelWasCreatedEvent = aHotel.getEvents().get(0);
 
         assertEquals(1, aHotel.getEvents().size());
+        assertTrue(hotelWasCreatedEvent.getOccurredOn().isBefore(Instant.now()));
         assertTrue(hotelWasCreatedEvent instanceof HotelWasCreated);
         assertEquals(aHotel.getId(), ((HotelWasCreated) hotelWasCreatedEvent).getHotelId());
         assertEquals("A hotel", ((HotelWasCreated) hotelWasCreatedEvent).getName());
@@ -213,6 +217,7 @@ class HotelTest {
 
         DomainEvent hotelAddressWasChanged = aHotel.getEvents().get(0);
 
+        assertTrue(hotelAddressWasChanged.getOccurredOn().isBefore(Instant.now()));
         assertEquals(1, aHotel.getEvents().size());
         assertTrue(hotelAddressWasChanged instanceof HotelAddressWasChanged);
         assertEquals(aHotel.getId(), ((HotelAddressWasChanged) hotelAddressWasChanged).getHotelId());
