@@ -145,7 +145,8 @@ https://www.kaggle.com/jiashenliu/515k-hotel-reviews-data-in-europe
 - Microservices Evolution: How to break your monolithic database by Edson Yanaga https://www.youtube.com/watch?v=6dfBd-2Oq1M
 - Using sagas to maintain data consistency in a microservice architecture by Chris Richardson
    https://www.youtube.com/watch?v=YPbGW3Fnmbc
-
+- Curing you Domain Model Anemia with Effective & Clean Tips from the Real World by Edson Yanaga
+   https://www.youtube.com/watch?v=zzxinXTIMmo
 ### Docs:
 
 - https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implementation
