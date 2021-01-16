@@ -7,33 +7,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CreateHotelUseCaseTest {
 
     @Test
-    public void givenAUseCase_whenGivenAValidCreteHotelCommand_thenItShouldSuccessfullyExecute() {
+    public void givenValidHotelInput_whenExecutingTheUseCase_thenItRespondWithSuccess() {
         CreateHotelUseCase useCase = new CreateHotelUseCase();
 
-        CreateHotelInput command = new CreateHotelInput(
+        CreateHotelInput input = new CreateHotelInput(
             "Paleis op de Dam",
             "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
             52.373161,
             4.890900
         );
 
-        CreateHotelResponse response = useCase.execute(command);
+        CreateHotelResponse response = useCase.execute(input);
 
         assertEquals(CreateHotelResponse.SUCCESS, response);
     }
 
     @Test
-    public void givenAUseCase_whenGivenInvalidLocationDetails_thenItShouldFail() {
+    public void givenInvalidLocationDetails_whenUseCaseIsExecuted_thenItRespondWithFailed() {
         CreateHotelUseCase useCase = new CreateHotelUseCase();
 
-        CreateHotelInput command = new CreateHotelInput(
+        CreateHotelInput input = new CreateHotelInput(
             "Paleis op de Dam",
             "Nieuwezijds Voorburgwal 147, 1012 RJ Amsterdam",
             200.,
             -200.
         );
 
-        CreateHotelResponse response = useCase.execute(command);
+        CreateHotelResponse response = useCase.execute(input);
 
         assertEquals(CreateHotelResponse.FAILED, response);
     }
