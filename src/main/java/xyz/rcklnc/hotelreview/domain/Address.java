@@ -3,7 +3,10 @@ package xyz.rcklnc.hotelreview.domain;
 import lombok.NonNull;
 import lombok.Value;
 
+import javax.persistence.Embeddable;
+
 @Value
+@Embeddable
 public class Address {
     String addressLine;
     Double latitude;
