@@ -4,17 +4,24 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@Entity
 public class Hotel extends Aggregate {
 
     @EqualsAndHashCode.Include
     @Getter
+    @EmbeddedId
     private final HotelId id;
 
     @Getter
     private String name;
 
     @Getter
+    @Embedded
     private Address address;
 
     private Hotel(@NonNull HotelId id, String name, Address address) {

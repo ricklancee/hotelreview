@@ -1,9 +1,9 @@
-package xyz.rcklnc.hotelreview.application;
+package xyz.rcklnc.hotelreview.usecases;
 
 import lombok.Value;
 
 @Value
-public class CreateHotelInput {
+public class CreateHotelParams {
     String hotelName;
     String addressLine;
     Double latitude;
